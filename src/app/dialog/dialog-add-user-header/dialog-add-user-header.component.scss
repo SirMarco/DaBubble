@@ -1,0 +1,75 @@
+.dialog {
+  display: block;
+  padding: 40px;
+  background: white;
+}
+
+.dialog-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  svg {
+    cursor: pointer;
+
+    &:hover {
+      background-color: var(--lighterPurple);
+      border-radius: 50%;
+
+      path {
+        fill: var(--purple3);
+      }
+    }
+  }
+}
+
+.dialog-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  > span {
+    color: var(--purple2);
+    padding-bottom: 10px;
+  }
+}
+
+.dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  button {
+    margin-left: 8px;
+  }
+}
+
+.dialog-actions {
+  button {
+    width: 125px;
+    height: 49px;
+    color: white;
+    background-color: var(--purple1);
+    border: unset;
+    border-radius: 25px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: var(--lightPurple);
+    }
+  }
+}
+
+.close {
+  background-image: url('/assets/img/main-page/thread/cross.svg');
+  background-repeat: no-repeat;
+  height: 40px;
+  width: 40px;
+  color: white;
+  background-color: white;
+  border: none;
+  cursor: pointer;
+  &:hover {
+    background-image: url('/assets/img/main-page/thread/cross-hover.svg');
+  }
+}
+
+.error-message {
+  color: red;
+}

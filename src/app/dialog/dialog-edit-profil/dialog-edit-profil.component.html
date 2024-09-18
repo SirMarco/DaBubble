@@ -1,0 +1,90 @@
+<div class="dialog">
+  <div class="dialog-content">
+    <div class="dialog-header">
+      <h2>{{title}}</h2>
+      <div class="close" (click)="close()"></div>
+    </div>
+    <div class="container-profil">
+      <div class="img">
+        <img [src]="profileImg || data.user.photoURL" alt="">
+        <div class="icon" *ngIf="edit" (click)="openProfilAvatar()">
+          <mat-icon>edit</mat-icon>
+        </div>
+      </div>
+    </div>
+    @if (!editNameClicked) {
+    <div class="container-title">
+      <div class="fs-18-400">
+        <span class=" username">{{data.user.username}}</span>
+        <span class="edit fs-18" *ngIf="(currentUserId$ | async) === data.user.uid"
+          (click)="editProfilBtn()">{{editName}}</span>
+      </div>
+      <div class="fs-18-400">
+        @if (data.user.onlineStatus) {
+        <div class="avatarStatus">
+          <img src="../../assets/img/main-page/head/Online.svg">
+          <span style="color: var(--onlineGreen);" class="fs-20">Aktiv</span>
+        </div>
+        }@else {
+        <div class="avatarStatus">
+          <img src="../../assets/img/main-page/head/Offline.svg">
+          <span style="color: var(--textGray);" class="fs-20">Offline</span>
+        </div>
+        }
+      </div>
+    </div>
+    }
+    @if (!editNameClicked) {
+    <div class="email">
+      <img src="../../../assets/img/general/mail.svg" alt="" srcset="">
+      <div>
+        <div class="fs-20-700">E-Mail-Adresse</div>
+        <a class="fs-18" href="mailto:{{data.user.email}}">{{data.user.email}}</a>
+      </div>
+    </div>
+    <div class="dialog-actions">
+      <button (click)="openDirectMessage(data.user.uid)"><img src="../../../assets/img/general/message.svg"><span
+          class="fs-18-700">Nachricht</span></button>
+    </div>
+    }@else {
+    <div class="email-edit">
+      <div class="row">
+        <img src="../../../assets/img/general/mail.svg" alt="" srcset="">
+        <div class="fs-20-700">Vollständiger Name</div>
+      </div>
+      <div class="row">
+        <input class="fs-18" [disabled]="inputNameDisabled" [(ngModel)]="profilName" minlength="3" type="text">
+      </div>
+      <div *ngIf="profilName && profilName.trim().split(' ').length < 2" class="error-message">
+        Bitte geben Sie sowohl Vor- als auch Nachnamen ein.
+      </div>
+      <div class="row">
+        <img src="../../../assets/img/general/mail.svg" alt="" srcset="">
+        <div class="fs-20-700">Vollständige EMail Adresse</div>
+      </div>
+      <div class="row">
+        <input class="fs-18" [disabled]="isGuestUser" [(ngModel)]="profilEmail" type="text" />
+      </div>
+      <div *ngIf="!profilEmail" class="error-message">
+        E-Mail darf nicht leer sein.
+      </div>
+      <div *ngIf="profilEmail && !isValidEmail(profilEmail)" class="error-message">
+        Bitte geben Sie eine gültige E-Mail-Adresse ein.
+      </div>
+
+      <div class="row" *ngIf="isGuestUser">
+        <span class="fs-18 error-message">Gastbenutzer - nicht bearbeitbar</span>
+      </div>
+      <div class="dialog-actions">
+        <button class="exitBtn fs-18-700" (click)="close()">Abbrechen</button>
+        <button *ngIf="hasChanges() && editNameClicked && profilName && profilEmail && isValidEmail(profilEmail)"
+          class="saveBtn fs-18-700" (click)="updateUser()">
+          Speichern
+        </button>
+
+
+      </div>
+    </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,193 @@
+.dialog {
+  display: block;
+  padding: 40px;
+  background: white;
+  @media (max-width: 790px) {
+    padding: 30px;
+  }
+}
+
+.dialog-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  h2 {
+    margin: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    flex-grow: 1;
+  }
+  svg {
+    cursor: pointer;
+
+    &:hover {
+      background-color: var(--lighterPurple);
+      border-radius: 50%;
+
+      path {
+        fill: var(--purple3);
+      }
+    }
+  }
+}
+
+.dialog-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.container-channel {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  border: 1px solid var(--lightPurple);
+  border-radius: 20px;
+  padding: 20px;
+  transition: 220ms;
+
+  > div {
+    display: flex;
+    justify-content: space-between;
+
+    .edit {
+      color: var(--purple3);
+      cursor: pointer;
+
+      &:hover {
+        font-weight: 700;
+      }
+    }
+  }
+}
+.membersHideMobile {
+  @media (min-width: 1200px) {
+    display: none;
+  }
+}
+
+.container-channel-edit-mode {
+  border: none;
+  padding: 0;
+  transition: 220ms;
+}
+
+.edit-channel {
+  > input,
+  textarea {
+    width: 100%;
+    border: 1px solid var(--lightPurple);
+    border-radius: 40px;
+    box-sizing: border-box;
+    padding: 18px 20px 18px 20px;
+    outline: none;
+    overflow: hidden;
+  }
+  :focus {
+    border: 1px solid var(--purple1);
+  }
+}
+
+.line {
+  margin: 20px 0;
+  border: 0;
+  border-top: 1px solid var(--lightPurple);
+}
+
+.dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 16px;
+}
+
+.dialog-actions {
+  button {
+    height: 49px;
+    padding: 12px 25px 12px 25px;
+    color: white;
+    border: unset;
+    background-color: var(--purple1);
+    border-radius: 25px;
+    outline: none;
+    cursor: pointer;
+
+    &:hover {
+      background-color: var(--lightPurple);
+    }
+  }
+}
+
+.close {
+  background-image: url('/assets/img/main-page/thread/cross.svg');
+  background-repeat: no-repeat;
+  height: 40px;
+  width: 40px;
+  color: white;
+  background-color: white;
+  border: none;
+  flex-shrink: 0;
+  cursor: pointer;
+  &:hover {
+    background-image: url('/assets/img/main-page/thread/cross-hover.svg');
+  }
+}
+
+.container-users {
+  flex-direction: column;
+  max-height: 230px;
+  overflow-y: auto;
+  flex-grow: 1;
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: #edeefe transparent;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+
+  > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    padding: 4px 20px;
+
+    &:hover,
+    &.active {
+      background-color: var(--lighterPurple);
+      color: var(--purple3);
+      border-radius: 30px;
+      span {
+        font-weight: 700;
+      }
+    }
+    > span {
+      flex: 1;
+    }
+  }
+}
+
+.avatarStatus {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  > img:first-child {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+
+  > :last-child {
+    position: absolute;
+    width: 14px;
+    bottom: 0;
+    right: 0;
+  }
+}

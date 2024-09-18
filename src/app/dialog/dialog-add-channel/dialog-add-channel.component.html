@@ -1,0 +1,62 @@
+<div class="dialog">
+  @if (currentStep === 'channel') {
+  <div class="dialog-content">
+    <div class="dialog-header">
+      <h2>Channel erstellen</h2>
+      <button class="close" type="button" (click)="close()"></button>
+    </div>
+    <span class="fs-18">Channels dienen deinem Team zur Kommunikation. Am besten sollten sie themenbezogen sein
+      #marketing zum
+      Beispiel.</span>
+    <form [formGroup]="addChannelForm" (ngSubmit)="submit()">
+      <div class="form-group">
+        <label for="name" class="fs-18-700">Channel-Name</label>
+        <input id="name" type="text" class="fs-18" formControlName="name" placeholder="# z.B. Kooperationsprojekte"
+          required cdkFocusInitial>
+        <div *ngIf="addChannelForm.get('name')?.touched && addChannelForm.get('name')?.invalid" class="error">
+          <div *ngIf="addChannelForm.get('name')?.errors?.['required']">Name ist erforderlich.</div>
+          <div *ngIf="addChannelForm.get('name')?.errors?.['minlength']">Der Name muss mindestens 3 Zeichen lang sein.
+          </div>
+        </div>
+        <div class="error" *ngIf="errorMessage">Der Name existriert bereits.</div>
+      </div>
+      <div class="form-group">
+        <label for="description" class="fs-18-700">Beschreibung (optional)</label>
+        <input id="description" class="fs-18" type="text" formControlName="description" placeholder="Dein Text hier">
+      </div>
+      <div class="dialog-actions">
+        <button type="submit" class="fs-18-700" [disabled]="addChannelForm.invalid">Erstellen</button>
+      </div>
+    </form>
+  </div>
+  }
+  @if (currentStep === 'user') {
+  <div class="dialog-content">
+    <div class="dialog-header">
+      <h2>Leute hinzufügen</h2>
+      <button class="close" type="button" (click)="close()"></button>
+    </div>
+    <form [formGroup]="addUserForm" (ngSubmit)="submitUser()">
+      <div class="form-group-add-user">
+        <div class="form-group-row">
+          <input id="all" type="radio" formControlName="selection" value="all" required>
+          <label for="all" class="fs-18">Alle Mitglieder zu <span style="color: var(--purple1);">{{ channelName
+              }}</span>
+            hinzufügen</label>
+        </div>
+        <div>
+          <input id="select" type="radio" formControlName="selection" value="select" required>
+          <label for="select" class="fs-18">Bestimmte Leute hinzufügen</label>
+        </div>
+        <ng-container *ngIf="addUserForm.get('selection')?.value === 'select'">
+          <app-dialog-add-user class="custom-width-50" [selectedUsers]="selectedUsers" [allUsers]="users"
+            (removeUser)="removeUser($event)"></app-dialog-add-user>
+        </ng-container>
+      </div>
+      <div class="dialog-actions">
+        <button type="submit" class="fs-18-700" [disabled]="addUserForm.invalid">Hinzufügen</button>
+      </div>
+    </form>
+  </div>
+  }
+</div>

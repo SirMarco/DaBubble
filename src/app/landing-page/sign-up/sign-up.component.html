@@ -1,0 +1,69 @@
+<div class="container">
+    <div class="content">
+        <div class="back-box">
+            <a (click)="backToLogin()"><mat-icon>arrow_back</mat-icon></a>
+        </div>
+        <h1 [ngClass]="{'fs-46': !mobileVersion, 'fs-32-700': mobileVersion}">Konto erstellen</h1>
+        <span class="login-text" [ngClass]="{'fs-20': !mobileVersion, 'fs-17': mobileVersion}">Mit deinem Namen und deiner E-Mail Adresse hast du dein neues DABubble Konto.</span>
+        <form [formGroup]="registerForm"  (ngSubmit)="onSubmit()">
+         
+            <div class="input-container">
+                <input 
+                class="fs-18"
+                formControlName="username" 
+                id="username" 
+                type="text"
+                placeholder="Name und Nachname"
+                >
+                <mat-icon>person_outline</mat-icon>
+                <span *ngIf="errorFc('username')">*Bitte einen Vorname und Nachname eingeben.</span>
+            </div>
+            <div class="input-container">
+                <input 
+                class="fs-18"
+                formControlName="email" 
+                id="email" 
+                type="email"
+                placeholder="beispielname@email.com"
+                >
+                <mat-icon>mail_outline</mat-icon>
+                <span class="fs-14" *ngIf="errorFc('email') ">*Diese E-Mail-Adresse ist leider ungültig.</span>
+                <span class="fs-14" *ngIf="alreadyUsed">*Diese E-Mail-Adresse ist bereits vergeben.</span>
+            </div>
+            <div class="input-container">
+               <input 
+                class="fs-18"
+                formControlName="password"
+                id="password"
+                type="password"
+                placeholder="Passwort"
+                 >
+                 <mat-icon>lock_outline</mat-icon>
+                 <span class="fs-14" *ngIf="errorPW('password')">*Gültiges Passwort mit mindestens 6 Zeichen.</span>
+            </div>
+
+            <div class="input-checkbox">
+                <div class="checkbox">
+                    <input 
+                    class="fs-18"
+                    formControlName="checkbox"
+                    id="checkbox"
+                    type="checkbox"
+                    >
+                </div>
+                
+                 <span [ngClass]="{'fs-16': !mobileVersion, 'fs-14': mobileVersion}">Ich stimme der <a (click)="toPrivacy()">Datenschutzerkärung</a> zu.</span>
+            </div>
+
+            <div class="futer-box">
+                <div class="futer-btn">
+                    <button type="submit" [disabled]="!registerForm.valid || isSubmited">
+                        <span class="fs-18-b">Weiter</span>
+                    </button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+

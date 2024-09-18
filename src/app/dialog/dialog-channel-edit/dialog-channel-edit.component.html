@@ -1,0 +1,61 @@
+<div class="dialog">
+  <div class="dialog-content">
+    <div class="dialog-header">
+      <h2># {{name}}</h2>
+      <div class="close" (click)="close()"></div>
+    </div>
+    <div class="container-channel" [ngClass]="{'container-channel-edit-mode': editNameClicked}">
+      <div class="fs-18-400">
+        <span class="fs-18-700">Channel-Name</span>
+        <span class="edit" (click)="editChannelBtn($event)">{{editName}}</span>
+      </div>
+      @if (!editNameClicked) {
+      <span class="fs-18"># {{name}}</span>
+      }@else {
+      <div class="edit-channel">
+        <input class="fs-18" [disabled]="inputNameDisabled" [(ngModel)]="name" minlength="3" type="text">
+      </div>
+      @if(channelExist){
+      <span style="color:red">Dieser Kanal existiert bereit</span>
+      }
+      }
+    </div>
+    <div class="container-channel" [ngClass]="{'container-channel-edit-mode': editDescriptionClicked}">
+      <div class="fs-18-400">
+        <span class="fs-18-700">Beschreibung</span>
+        <span class="edit" (click)="editDescriptionBtn($event)">{{editDescription}}</span>
+      </div>
+      @if (!editDescriptionClicked) {
+      <span class="fs-18">{{description}}</span>
+      } @else {
+      <div class="edit-channel">
+        <textarea #descriptionTextarea class="fs-18" [disabled]="inputNameDisabled" [(ngModel)]="description"
+          (input)="adjustHeight($event)" type="text"></textarea>
+      </div>
+      }
+      <div class="line"></div>
+      <span class="fs-18-700">Erstellt von</span>
+      <span class="fs-24" [ngStyle]="{'color': 'var(--purple3)'}">{{creator}}</span>
+    </div>
+    <div class="container-channel membersHideMobile">
+      <span class="fs-18-700">Mitglieder</span>
+      <div class="container-users">
+        @for (member of members; track $index) {
+        <div class="user" (click)="openProfil(member)">
+          <div>
+            <div class="avatarStatus" cl>
+              <img [src]="member.photoURL ? member.photoURL : '../../assets/img/landing-page/men1.svg'">
+              <img
+                [src]="member.onlineStatus ? '../../assets/img/main-page/head/Online.svg' : '../../assets/img/main-page/head/Offline.svg'">
+            </div>
+            <span class=" fs-18">{{member.username}}</span>
+          </div>
+        </div>
+        }
+      </div>
+    </div>
+    <div class="dialog-actions" *ngIf="(!isDefaultChannel)">
+      <button class="fs-20" (click)="removeUserFromChannel()">Channel verlassen</button>
+    </div>
+  </div>
+</div>
