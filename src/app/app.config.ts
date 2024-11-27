@@ -9,8 +9,7 @@ import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { getStorage, provideStorage } from '@angular/fire/storage';
 import { HashLocationStrategy } from '@angular/common';
 import { LocationStrategy } from '@angular/common';
-import { environment } from '../environments/environment';
-
+import { environment } from '../environments/environments';
 
 export const appConfig: ApplicationConfig = {
   providers: [

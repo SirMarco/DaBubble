@@ -104,7 +104,7 @@ import { UserLogged } from '../../models/user-logged.model';
    * @returns {void} - Does not return anything.
    */
   guestLogin(): void {
-    this.authService.login('guest@guest.com', 'Safa123').subscribe({
+    this.authService.login('guest@marco-engelhardt.ch', 'guest_User!*').subscribe({
       next: () => {
         this.errorM = null; 
         this.router.navigate(['/dashboard']);
